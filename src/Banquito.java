@@ -5,8 +5,8 @@ public class Banquito {
 
         String cliente = "Tony Stark";
         String cuenta = "Corriente";
-        double saldo = 1000;
-        int opcionSalida = 0;
+        double saldo = 1599.99;
+        int opcion = 0;
 
         String mensajeInicial = String.format("""
                 *******************************
@@ -27,42 +27,38 @@ public class Banquito {
                 2 - Retirar 
                 3 - Depositar
                 9 - Salir
-                """, cliente, cuenta, saldo);
+                """);
 
         System.out.println(mensajeInicial);
+        Scanner teclado = new Scanner(System.in);
 
-        while(opcionSalida != 9){
+        while(opcion != 9){
             System.out.println(mensajeOpciones);
-            Scanner teclado = new Scanner(System.in);
-            int opcion = teclado.nextInt();
+            opcion = teclado.nextInt();
 
             switch (opcion) {
                 case 1:
                     System.out.println("Su saldo es: $" + saldo);
                     break;
                 case 2:
-                    System.out.println("¿Cuál es el saldo que desea retirar?");
-                    Scanner tecladoRetiro = new Scanner(System.in);
-                    int retiro = tecladoRetiro.nextInt();
+                    System.out.println("¿Cuál es el valor a retirar?");
+                    double retiro = teclado.nextDouble();
 
                     if (saldo >= retiro){
-                        saldo = saldo - retiro;
+                        saldo -= retiro;
                         System.out.println("Saldo restante: $" + saldo);
                     }else{
                         System.out.println("Saldo insuficiente.");
                     }
-
                     break;
                 case 3:
                     System.out.println("¿Cuál es el valor a depositar?");
-                    Scanner tecladoDeposito = new Scanner(System.in);
-                    int deposito = tecladoDeposito.nextInt();
-                    saldo = saldo + deposito;
-                    System.out.println("Su saldo actualizado es $" + saldo);
+                    double deposito = teclado.nextDouble();
+                    saldo += deposito;
+                    System.out.println("Su nuevo saldo es $" + saldo);
                     break;
                 case 9:
                     System.out.println("Finalizando el programa. Muchas gracias por usar Mi Banquito.");
-                    opcionSalida = 9;
                     break;
                 default:
                     System.out.println("Opción no válida, seleccione otra opción.");
